@@ -5,6 +5,9 @@ from sqlalchemy.orm import Session
 from twitch_bot.model.database_interface import DataBase
 
 
+from model.models import Channels, Commands, Links
+
+
 #INFO the controller determiens how the view+model work together
 class ChatBotController:
 
@@ -31,3 +34,19 @@ class ChatBotController:
             asyncio.run(self.view.run())
             session.commit()
 
+
+
+
+
+from models.user import User, Session
+   def create_user(name, email):
+       session = Session()
+       new_user = User(name=name, email=email)
+       session.add(new_user)
+       session.commit()
+       session.close()
+   def get_users():
+       session = Session()
+       users = session.query(User).all()
+       session.close()
+       return users
